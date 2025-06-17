@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>How Old Are You?</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f8ff;
+            text-align: center;
+            padding: 50px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        input, button {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>👋 Hey there! Let's find out how old you are.</h2>
+    
+    <p>Please select your birth date:</p>
+    <input type="date" id="dob">
+    <br>
+    <button onclick="calculateAge()">Tell Me My Age</button>
+
+    <div id="result"></div>
+
+    <script>
+        function calculateAge() {
+            const dobInput = document.getElementById('dob').value;
+            const resultDiv = document.getElementById('result');
+
+            if (!dobInput) {
+                resultDiv.innerText = "Oops! Please select a valid birth date first.";
+                return;
+            }
+
+            const birthDate = new Date(dobInput);
+            const today = new Date();
+
+            let years = today.getFullYear() - birthDate.getFullYear();
+            let months = today.getMonth() - birthDate.getMonth();
+            let days = today.getDate() - birthDate.getDate();
+
+            if (days < 0) {
+                months--;
+                days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+            }
+
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            resultDiv.innerHTML = `🎉 You are <strong>${years}</strong> years, <strong>${months}</strong> months, and <strong>${days}</strong> days old!<br>
+            Isn't time flying? ⏳`;
+        }
+    </script>
+
+</body>
+</html>
